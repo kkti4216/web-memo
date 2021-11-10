@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+
+  flask:
+    container_name: flask-uwsgi
+    build: ./flask
+    volumes:
+      - ./web_memo_socks/:/tmp/
+    tty: true
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - ./web_memo_socks/:/tmp/
+      - ./nginx/my_server.conf:/etc/nginx/conf.d/my_server.conf
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  web_memo_socks:
