@@ -1,24 +1,56 @@
-{% extends 'bootstrap/base.html' %}
+<html lang="ja">
+
+<head>
+  {% block head %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% block styles %}
+  <!-- Bootstrap CSS -->
+  {{ bootstrap.load_css() }}
+  {% endblock %}
+
+  <title>web memo</title>
+  {% endblock %}
+</head>
 {% block content %}
 <div class="container">
-    <div class="form-group">
-        <form action="/regist/" method="post">
-            <!-- <input type="text" name="article"> -->
-            <textarea name="new_rec" rows="6" cols="100" class="form-control"></textarea>
-            <button type="submit" class="btn btn-primary">submit</button>
-        </form>
-    </div>
-    <table class="table">
-    {% for rec in memo %}
+  <div class="form-group">
+    <form action="/regist/" method="post">
+      <!-- <input type="text" name="article"> -->
+      <textarea name="new_rec" rows="6" cols="100" class="form-control"></textarea>
+      <button type="submit" class="btn btn-primary">submit</button>
+    </form>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead>
         <tr>
-            <th>
-                <form action="/delete/" method="post">
-                    <button type="submit" name="del_rec" value={{ rec.id }} class="btn btn-secondary">delete</button>
-                </form>
-            </th>
-            <th>{{ rec.id }}</th><th>{{ rec.time }}</th><th>{{ rec.text }}</th>
+          <th style="width: 8%"></th>
+          <th style="width: 4%">id</th>
+          <th style="width: 18%">timestamp</th>
+          <th style="width: 69%">memo</th>
         </tr>
-    {% endfor %}
+      </thead>
+      <tbody>
+        {% for rec in memo %}
+        <tr>
+          <td>
+            <form action="/delete/" method="post">
+              <button type="submit" name="del_rec" value={{ rec.id }} class="btn btn-secondary btn-sm">delete</button>
+            </form>
+          </td>
+          <td>{{ rec.id }}</td>
+          <td>{{ rec.time }}</td>
+          <td class="text-break">{{ rec.text }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
+  </div>
 </div>
 {% endblock %}
+
+</html>

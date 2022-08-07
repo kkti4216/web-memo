@@ -6,7 +6,7 @@ from datetime import datetime
 from config import *
 
 app = Flask(__name__)
-bootstrap = flask_bootstrap.Bootstrap(app)
+bootstrap = flask_bootstrap.Bootstrap4(app)
 
 @app.route("/", methods=["GET"])
 def main():
