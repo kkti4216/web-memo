@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
+{% extends 'bootstrap/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="form-group">
         <form action="/" method="post">
             <!-- <input type="text" name="article"> -->
-            <textarea name="new_rec" rows="6" cols="100"></textarea>
-            <button type="submit">送信する</button>
+            <textarea name="new_rec" rows="6" cols="100" class="form-control"></textarea>
+            <button type="submit" class="btn btn-primary">送信する</button>
         </form>
-        <p></p>
-        {% for rec in memo %}
-            <p>{{ rec.id }} {{ rec.time }} {{ rec.text }} </p>
-        {% endfor %}
-    </body>
-</html>
+    </div>
+    <table class="table">
+    {% for rec in memo %}
+        <tr><th>{{ rec.id }}</th><th>{{ rec.time }}</th><th>{{ rec.text }}</th></tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}
